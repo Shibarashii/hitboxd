@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "Users",
-    "Games",
-    "Reviews",
+    "users",
+    "games",
+    "reviews",
     "debug_toolbar",
 ]
 
