@@ -20,10 +20,10 @@ class Follow(models.Model):
     following = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name="follower_set"
     )
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        constraints = [  # noqa: RUF012
+        constraints = [  
             models.UniqueConstraint(
                 fields=["follower", "following"], name="unique_follow"
             )
