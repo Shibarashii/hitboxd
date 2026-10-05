@@ -8,8 +8,11 @@
 <h1> 
   {% if game %}
   <h1> {{game.name}}</h1>
+  <p> {{game.summary}} </p>
+  <p> {{game.rating}} </p>
 
-  <img src="{{game.cover_url}}" alt="Game Cover">
+  <img src="{{game.cover_url}}" alt="{{game.name}} cover">
+
 
   {% else %}
 
