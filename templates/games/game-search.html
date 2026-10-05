@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block page_title %} Game Search {% endblock %}
+
+{% block content %}
+
+<main> 
+<h1> 
+  {% if game %}
+  <h1> {{game.name}}</h1>
+
+  <img src="{{game.cover_url}}" alt="Game Cover">
+
+  {% else %}
+
+  <h1> Game not found</h1>
+
+  {% endif %}
+
+</h1>
+</main>
+
+{% endblock %}
