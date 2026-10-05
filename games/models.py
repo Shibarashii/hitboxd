@@ -15,7 +15,7 @@ class Game(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     cover_url = models.URLField(blank=True)
-    first_release_date = models.DateField(null=True, blank=True)
+    release_date = models.DateField(null=True, blank=True)
     summary = models.TextField(blank=True)
     genres = models.ManyToManyField(Genre, related_name="games", blank=True)
 
