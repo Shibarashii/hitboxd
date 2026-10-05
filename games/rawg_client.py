@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 
 import requests
-from django.db import IntegrityError
 from dotenv import load_dotenv
 
 from .utils import dump_response
@@ -15,9 +14,15 @@ _API_KEY = os.getenv("RAWG_API_KEY")
 
 
 @dump_response("games.json")
-def list_games(**kwargs) -> list:
+def fetch_games(**kwargs) -> list:
     """
-    Get a list of games.
+    Fetch a list of games.
+
+    Args:
+        search (str): Seach query.
+
+    Returns:
+        List of games.
     """
     try:
         response = requests.get(
@@ -33,9 +38,9 @@ def list_games(**kwargs) -> list:
 
 
 @dump_response("game-details.json")
-def retrieve_game(slug_or_id: int | str) -> dict:
+def fetch_single_game(slug_or_id: int | str) -> dict:
     """
-    Get a game by an id or slug.
+    Fetch a game using an id or slug.
     """
     try:
         response = requests.get(
