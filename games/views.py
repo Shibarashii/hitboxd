@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from .services import list_games, retrieve_game_details
 from .forms import GameSearchForm
+from .services import list_games, retrieve_game_details
 
 
 # Create your views here.

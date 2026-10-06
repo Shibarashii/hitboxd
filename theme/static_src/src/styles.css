@@ -7,4 +7,23 @@
   * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
   * the scope of this path.
   */
+
+@theme { 
+  /* colors */
+  --color-brand-yellow-100: #e6f5be;
+  --color-brand-yellow-200: #f0ffbb;
+  --color-brand-yellow-300: #e9fbaa;
+  --color-brand-yellow-400: #e0f88e;
+  --color-brand-yellow-500: #dcf976;
+}
+
+@utility btn-primary { 
+  @apply bg-brand-yellow-500 p-2 rounded-2xl
+} 
+
+@utility form-input { 
+  @apply border-2 border-black p-2 rounded-md
+}
+
+
 @source "../../../**/*.{html,py,js}";

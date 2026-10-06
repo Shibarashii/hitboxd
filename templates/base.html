@@ -1,17 +1,17 @@
 {% load static tailwind_tags %}
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block page_title %} Title {% endblock %}</title>
-        <link rel="icon" href="{% static "icons/favicon.png" %}">
-        {% tailwind_css %}
-    </head>
-    <body>
-        <main>
-            {% block content %}Block{% endblock %}
-        </main>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %} Title {% endblock %}</title>
+    <link rel="icon" href="{% static "icons/favicon.png" %}">
+    {% tailwind_css %}
+  </head>
+  <body>
+    {% include "partials/navbar.html" %}
+    <main class="flex flex-col justify-center">
+      {% block content %}Block{% endblock %}
+    </main>
+  </body>
 </html>

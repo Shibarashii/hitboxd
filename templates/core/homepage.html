@@ -1,11 +1,19 @@
 {% extends "base.html" %}
-
-{% block page_title %} Home Page {% endblock %}
-
+{% load static %}
+{% block page_title %}Home Page{% endblock %}
 {% block content %}
+  <section class="bg-red-950 h-3/4 flex flex-col justify-center items-center text-center gap-1.5 px-2 pt-24 md:gap-5
+                  md:pt-32">
+    <h1 class="text-white text-xl px-2 md:text-4xl">Track every game you played. Make every experience heard by thousands</h1>
 
-<main class="bg-pink-300 h-screen"> 
-<h1 class="text-2xl bg-amber-50"> Hello World </h1>
-</main>
+    <a href="" class="btn-primary w-32 md:w-64"> Log in </a>
 
+    <a class="text-white text-xs" href="">Don't have an account yet? Sign in</a>
+    <img src="{% static 'img/sprites.png' %}"
+         alt="sprites.png"
+         class="justify-end">
+  </section>
+  <section>
+    <img src="{% static 'img/poster-1.png' %}" alt="" class="w-full">
+  </section>
 {% endblock %}
