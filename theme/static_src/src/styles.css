@@ -60,11 +60,15 @@
          focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black 
          disabled:cursor-not-allowed disabled:opacity-50
          md:py-4;
-        
 }
 
 @utility form-label {
   @apply font-medium;
+}
+
+@utility text-form-error {
+  @apply text-xs text-brand-pink-300
+         md:text-sm;
 }
 
 @source "../../../**/*.{html,py,js}";
