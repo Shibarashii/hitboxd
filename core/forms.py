@@ -1,6 +1,7 @@
 from django import forms
-from users.models import User
+from django.contrib.auth.forms import UserCreationForm
 
+from users.models import User
 
 # class SignUpForm(forms.Form):
 #     email = forms.EmailField(
@@ -14,10 +15,8 @@ from users.models import User
 #     )
 
 
-class SignUpForm(forms.ModelForm):
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(required=True)
     class Meta:
         model = User
-        fields = ["username", "email", "password"]
-        widgets = {
-            "password": forms.PasswordInput(),
-        }
+        fields = ["username", "email"]

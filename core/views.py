@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.urls import reverse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 
@@ -11,8 +11,9 @@ from .forms import SignUpForm
 class HomePageView(TemplateView):
     template_name = "core/homepage.html"
 
-class SignUpView(CreateView):
+class SignUpView(CreateView, SuccessMessageMixin):
     model = User
     form_class = SignUpForm
     template_name = "core/signup.html"
-    success_url = "core/homepage.html"
+    success_url = reverse_lazy("homepage")
+    success_message = "Account created."
