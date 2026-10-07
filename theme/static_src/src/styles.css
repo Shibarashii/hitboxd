@@ -8,22 +8,63 @@
   * the scope of this path.
   */
 
-@theme { 
+@theme {
   /* colors */
   --color-brand-yellow-100: #e6f5be;
   --color-brand-yellow-200: #f0ffbb;
   --color-brand-yellow-300: #e9fbaa;
   --color-brand-yellow-400: #e0f88e;
   --color-brand-yellow-500: #dcf976;
+
+  --color-brand-pink-100: #c8496a;
+  --color-brand-pink-200: #b92e52;
+  --color-brand-pink-300: #9d2741;
+  --color-brand-pink-400: #84132f;
+  --color-brand-pink-500: #780c28;
+
+  --color-brand-violet-100: #cf81b8;
+  --color-brand-violet-200: #a56490;
+  --color-brand-violet-300: #834171;
+  --color-brand-violet-400: #612d53;
+  --color-brand-violet-500: #4d2341;
+
+  --color-brand-lemon-100: #efe9c9;
+  --color-brand-lemon-200: #e9da32;
+  --color-brand-lemon-300: #ffd53e;
+  --color-brand-lemon-400: #f3be00;
+  --color-brand-lemon-500: #ff9320;
 }
 
-@utility btn-primary { 
-  @apply bg-brand-yellow-500 p-2 rounded-2xl
-} 
-
-@utility form-input { 
-  @apply border-2 border-black p-2 rounded-md
+@layer base {
+  input:where(
+    [type="text"],
+    [type="email"],
+    [type="password"],
+    [type="search"]
+  ) {
+    @apply w-full rounded-md border border-black bg-white px-3 py-2 shadow-sm
+           placeholder:text-gray-400 
+           focus:border-brand-lemon-500 focus:ring-2 focus:ring-brand-yellow-500 focus:outline-none
+           aria-invalid:border-red-600 aria-invalid:ring-red-600 
+           disabled:opacity-50;
+  }
 }
 
+@utility btn-primary {
+  @apply w-full inline-flex cursor-pointer items-center justify-center gap-2 
+         border-b-brand-pink-500 border-b-2 rounded-2xl bg-brand-lemon-300 px-4 py-2 
+         font-semibold text-black no-underline shadow-sm 
+         transition-colors 
+         hover:bg-brand-lemon-200 
+         active:bg-brand-lemon-500
+         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black 
+         disabled:cursor-not-allowed disabled:opacity-50
+         md:py-4;
+        
+}
+
+@utility form-label {
+  @apply font-medium;
+}
 
 @source "../../../**/*.{html,py,js}";
