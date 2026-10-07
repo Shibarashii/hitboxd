@@ -1,24 +1,24 @@
 {% load static %}
-<nav class="flex justify-evenly items-center gap-5 bg-gray-800 
-            text-brand-yellow-500 text-center text-xs md:text-base lg:text-lg
-            px-2">
+<nav class="flex justify-evenly items-center gap-5 bg-gray-800 text-brand-lemon-200 text-center text-xs md:text-base lg:text-lg px-2">
   <a class="flex items-center" href="{% url 'homepage' %}">
-    <img src="{% static 'icons/favicon.png' %}" alt="icon" class="h-12 p-2 md:h-16 lg:h-18 lg:p-2.5">
+    <img src="{% static 'icons/favicon.png' %}"
+         alt="icon"
+         class="h-12 p-2 md:h-16 lg:h-18 lg:p-2.5">
     <h1 class="font-bold">HITBOXD</h1>
   </a>
   <div>
     <ul class="flex items-center gap-2.5 md:gap-6 lg:gap-8">
       <li>
-        <a href=""> Sign in </a>
+        <a href="">Sign in</a>
       </li>
       <li>
-        <a href=""> Create account </a>
+        <a href="{% url 'sign-up' %}">Create account</a>
       </li>
       <li>
-        <a href="{% url 'search-games' %}"> Games </a>
+        <a href="{% url 'search-games' %}">Games</a>
       </li>
       <li>
-        <a href=""> Members </a>
+        <a href="">Members</a>
       </li>
     </ul>
   </div>
