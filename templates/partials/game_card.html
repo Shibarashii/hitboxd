@@ -1,0 +1,11 @@
+<article class="relative flex justify-center border border-brand-lemon-100 w-32 md:w-48 aspect-3/4 hover:scale-105 transition-transform">
+  <img src="{{ game.background_image }}"
+       alt="{{ game.name }} background image"
+       class="size-full object-cover">
+  <div class="absolute inset-0 flex items-center justify-center bg-black/30 p-2">
+    <h2 class="text-center text-sm text-white text-shadow-md md:text-base md:text-shadow-lg text-shadow-black">
+      <a href="{% url 'game-details' slug=game.slug %}"
+         class="after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-white">{{ game.name }}</a>
+    </h2>
+  </div>
+</article>

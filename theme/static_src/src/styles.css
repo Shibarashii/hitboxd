@@ -71,4 +71,26 @@
          md:text-sm;
 }
 
+/* Centred page wrapper: use on a page's outer section */
+@utility page-container {
+  @apply mx-auto w-full max-w-7xl px-4;
+}
+
+/* Pink full-width band with centred column content; add padding/height per page */
+@utility hero-section {
+  @apply flex flex-col items-center justify-center gap-1.5
+         bg-brand-pink-500 text-center;
+}
+
+/* Feedback messages (e.g. Django messages framework) */
+@utility alert-success {
+  @apply rounded-md border-l-4 border-brand-lemon-400 bg-brand-yellow-200
+         px-4 py-2 text-sm text-black md:text-base;
+}
+
+@utility alert-error {
+  @apply rounded-md border-l-4 border-brand-pink-300 bg-brand-lemon-100
+         px-4 py-2 text-sm text-brand-pink-400 md:text-base;
+}
+
 @source "../../../**/*.{html,py,js}";
