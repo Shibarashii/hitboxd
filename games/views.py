@@ -19,9 +19,11 @@ class SearchGameView(TemplateView):
             query = form.cleaned_data.get("q")
             if query:
                 games = search_games(query)
+                # with open("games/responses/games.json") as f:
+                #     games = json.load(f)
 
         context["form"] = form
-        context["games"] = games
+        context["games"] = games.get("results")
         return context
 
 
@@ -44,9 +46,6 @@ class SearchGameView(TemplateView):
 #     )
 
 
-@cache_control(max_age=3600, public=True)
 def retrieve_game(request, slug):
-    # game = get_or_sync_game(slug)
-    with open("games/responses/game-details.json") as f:
-        game = json.load(f)
+    game = get_or_sync_game(slug)
     return render(request, "games/game-details.html", {"game": game})

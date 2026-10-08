@@ -32,7 +32,7 @@ def fetch_games(**kwargs) -> list:
         )
         response.raise_for_status()
         # print(json.dumps(response.json(), indent=2))
-        return response.json()["results"]
+        return response.json()
     except requests.RequestException:
         return []
 
