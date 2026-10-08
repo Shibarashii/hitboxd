@@ -4,7 +4,7 @@ from .models import Game, Genre
 from .rawg_client import fetch_games, fetch_single_game
 
 
-PAGE_SIZE = 20
+PAGE_SIZE = 18
 
 
 def search_games(query: str, page: int = 1) -> dict:
