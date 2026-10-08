@@ -4,11 +4,11 @@ from .models import Game, Genre
 from .rawg_client import fetch_games, fetch_single_game
 
 
-def list_games(query: str | None):
+def search_games(query: str | None):
     games = fetch_games(search=query)
     return games
 
-def retrieve_game_details(slug: str):
+def get_or_sync_game(slug: str):
     try:
         game = Game.objects.get(slug=slug)
         print(f"{tc.GREEN}Cache hit for {game.name.upper()}.{tc.RESET}")

@@ -57,7 +57,7 @@ def fetch_single_game(slug_or_id: int | str) -> dict:
 
 if __name__ == "__main__":
     # list_games(search="Elden ring")
-    game_details = retrieve_game("elden-ring")
+    game_details = fetch_single_game("elden-ring")
     rawg_id = game_details.get("id")
     name = game_details.get("name")
     slug = game_details.get("slug")
