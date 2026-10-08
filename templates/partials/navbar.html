@@ -20,6 +20,30 @@
       <li>
         <a href="">Members</a>
       </li>
+      <li>
+        <form method="get" action="{% url 'search-games' %}" role="search">
+          <div class="relative">
+            <input type="search"
+                   name="q"
+                   value="{{ request.GET.q }}"
+                   placeholder="Search games.."
+                   aria-label="Search games"
+                   class="w-28 bg-gray-600 pl-9 text-brand-lemon-200 md:w-56">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-400"
+                 aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+          </div>
+        </form>
+      </li>
     </ul>
   </div>
 </nav>
