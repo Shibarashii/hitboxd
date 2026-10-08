@@ -14,7 +14,7 @@ _API_KEY = os.getenv("RAWG_API_KEY")
 
 
 @dump_response("games.json")
-def fetch_games(**kwargs) -> list:
+def fetch_games(**kwargs) -> dict:
     """
     Fetch a list of games.
 
@@ -34,7 +34,7 @@ def fetch_games(**kwargs) -> list:
         # print(json.dumps(response.json(), indent=2))
         return response.json()
     except requests.RequestException:
-        return []
+        return {}
 
 
 @dump_response("game-details.json")
