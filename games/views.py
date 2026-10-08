@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from django.views.decorators.cache import cache_control
+import json
 
 from .forms import GameSearchForm
 from .services import get_or_sync_game, search_games
@@ -42,7 +44,9 @@ class SearchGameView(TemplateView):
 #     )
 
 
-
+@cache_control(max_age=3600, public=True)
 def retrieve_game(request, slug):
-    game = get_or_sync_game(slug)
+    # game = get_or_sync_game(slug)
+    with open("games/responses/game-details.json") as f:
+        game = json.load(f)
     return render(request, "games/game-details.html", {"game": game})

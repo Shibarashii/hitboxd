@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% block page_title %}Game Search{% endblock %}
 {% block content %}
-  <div class="flex items-center justify-center h-screen">
-    <h1>
-      {% for game in games %}
+  <section class="flex flex-wrap gap-1.5">
+    {% for game in games %}
+      <article class="flex flex-col border border-brand-lemon-500 max-w-32 max-h-32">
         <a class="text-blue-700" href="{% url "game-details" game.slug %}">{{ game.name }}</a>
         <img src="{{ game.background_image }}"
-             alt="{{ game.name }} background image">
-      {% empty %}
-        <div>
-          <h1>Looking for games? Search here</h1>
-          <form method="get" action={% url 'search-games' %}>
-            {{ form.q }}
-            <button type="submit" class="btn-primary">Search</button>
-          </form>
-        </div>
-      {% endfor %}
-    </h1>
-  </div>
+             alt="{{ game.name }} background image"
+             class="w-32 aspect-square object-cover">
+      </article>
+    {% empty %}
+      <div>
+        <h1>Looking for games? Search here</h1>
+        <form method="get" action={% url 'search-games' %}>
+          {{ form.q }}
+          <button type="submit" class="btn-primary">Search</button>
+        </form>
+      </div>
+    {% endfor %}
+  </section>
 {% endblock %}
