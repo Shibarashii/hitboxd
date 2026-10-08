@@ -9,3 +9,4 @@ class GameSearchForm(forms.Form):
             "class": "form-input"
         }),
     )
+    page = forms.IntegerField(required=False, min_value=1, widget=forms.HiddenInput)

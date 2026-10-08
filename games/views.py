@@ -1,8 +1,10 @@
+from math import ceil
+
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
 from .forms import GameSearchForm
-from .services import get_or_sync_game, search_games
+from .services import PAGE_SIZE, get_or_sync_game, search_games
 
 
 class SearchGameView(TemplateView):
@@ -15,8 +17,14 @@ class SearchGameView(TemplateView):
 
         if form.is_valid():
             query = form.cleaned_data.get("q")
+            page = form.cleaned_data.get("page") or 1
             if query:
-                games = search_games(query).get("results")
+                data = search_games(query, page)
+                games = data.get("results", [])
+                context["page"] = page
+                context["num_pages"] = ceil(data.get("count", 0) / PAGE_SIZE)
+                context["has_previous"] = bool(data.get("previous"))
+                context["has_next"] = bool(data.get("next"))
                 # with open("games/responses/games.json") as f:
                 #     games = json.load(f)
 

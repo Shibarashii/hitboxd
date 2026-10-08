@@ -14,4 +14,15 @@
       </article>
     {% endfor %}
   </section>
+  {% if num_pages > 1 %}
+    <nav aria-label="Pagination" class="my-5 flex items-center justify-center gap-4 text-brand-lemon-100">
+      {% if has_previous %}
+        <a href="?q={{ request.GET.q|urlencode }}&amp;page={{ page|add:-1 }}">Previous</a>
+      {% endif %}
+      <span class="mx-3"> Page {{ page }} of {{ num_pages }} </span>
+      {% if has_next %}
+        <a href="?q={{ request.GET.q|urlencode }}&amp;page={{ page|add:1 }}">Next</a>
+      {% endif %}
+    </nav>
+  {% endif %}
 {% endblock %}

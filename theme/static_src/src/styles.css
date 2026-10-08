@@ -73,7 +73,7 @@
 
 /* Centred page wrapper: use on a page's outer section */
 @utility page-container {
-  @apply mx-auto w-full max-w-7xl px-4;
+  @apply mx-auto w-full md:max-w-7xl px-4;
 }
 
 /* Pink full-width band with centred column content; add padding/height per page */

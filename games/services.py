@@ -4,9 +4,12 @@ from .models import Game, Genre
 from .rawg_client import fetch_games, fetch_single_game
 
 
-def search_games(query: str | None):
-    games = fetch_games(search=query)
-    return games
+PAGE_SIZE = 20
+
+
+def search_games(query: str, page: int = 1) -> dict:
+    return fetch_games(search=query, page=page, page_size=PAGE_SIZE)
+
 
 def get_or_sync_game(slug: str):
     try:
