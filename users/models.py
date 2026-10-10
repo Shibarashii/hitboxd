@@ -10,7 +10,7 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     bio = models.TextField(blank=True)
-    avatar_url = models.URLField(blank=True)
+    avatar_url = models.ImageField()
 
     def __str__(self) -> str:
         return f"{self.user.username}'s Profile'"
