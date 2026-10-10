@@ -3,7 +3,6 @@ from core.utils import TerminalColors as tc
 from .models import Game, Genre
 from .rawg_client import fetch_games, fetch_single_game
 
-
 PAGE_SIZE = 18
 
 

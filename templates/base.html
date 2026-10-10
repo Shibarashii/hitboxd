@@ -11,6 +11,10 @@
   <body>
     {% include "partials/navbar.html" %}
     <main class="flex flex-col justify-center items-center bg-brand-pink-500 py-5">
+      {% for message in messages %}
+        <p role="status"
+           class="{% if message.tags == "error" %} alert-error {% else %} alert-success {% endif %}">{{ message }}</p>
+      {% endfor %}
       {% block content %}Block{% endblock %}
     </main>
   </body>

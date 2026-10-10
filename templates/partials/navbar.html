@@ -8,12 +8,16 @@
   </a>
   <div>
     <ul class="flex items-center gap-2.5 md:gap-6 lg:gap-8">
-      <li>
-        <a href="">Sign in</a>
-      </li>
-      <li>
-        <a href="{% url 'sign-up' %}">Create account</a>
-      </li>
+      {% if user.is_authenticated %}
+        <li> Welcome, {{ user.username }}</li>
+      {% else %}
+        <li>
+          <a href="{% url 'login' %}">Log in</a>
+        </li>
+        <li>
+          <a href="{% url 'registration' %}">Create account</a>
+        </li>
+      {% endif %}
       <li>
         <a href="{% url 'search-games' %}">Games</a>
       </li>

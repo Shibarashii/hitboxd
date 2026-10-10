@@ -154,3 +154,10 @@ MAILERS = {
 }
 
 TAILWIND_APP_NAME = "theme"
+
+MEDIA_ROOT = "uploads"
+MEDIA_URL = "/user-media/"
+
+LOGIN_REDIRECT_URL = "homepage"
+LOGOUT_REDIRECT_URL = "homepage"
+LOGIN_URL = "login"

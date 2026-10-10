@@ -11,9 +11,9 @@ from .forms import SignUpForm
 class HomePageView(TemplateView):
     template_name = "core/homepage.html"
 
-class SignUpView(CreateView, SuccessMessageMixin):
+class SignUpView(SuccessMessageMixin,CreateView):
     model = User
     form_class = SignUpForm
-    template_name = "core/signup.html"
+    template_name = "core/registration.html"
     success_url = reverse_lazy("homepage")
     success_message = "Account created."

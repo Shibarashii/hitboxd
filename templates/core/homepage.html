@@ -4,8 +4,8 @@
 {% block content %}
   <section class="hero-section h-3/4 px-2 pt-24 md:gap-5 md:pt-32">
     {% include "partials/headline.html" %}
-    <a href="" class="btn-primary w-32 md:w-64" id="login-button">Log in</a>
-    <a class="text-white text-xs lg:text-base" href="{% url 'sign-up' %}" id="sign-in-button">Don't have an account yet? Sign up</a>
+    <a href="{% url 'login' %}" class="btn-primary w-32 md:w-64" id="login-button">Log in</a>
+    <a class="text-white text-xs lg:text-base" href="{% url 'registration' %}" id="sign-in-button">Don't have an account yet? Sign up</a>
     <img src="{% static 'img/sprites.png' %}"
          alt="Image of sprites."
          class="justify-end">
