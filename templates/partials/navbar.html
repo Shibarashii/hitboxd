@@ -8,8 +8,21 @@
   </a>
   <div>
     <ul class="flex items-center gap-2.5 md:gap-6 lg:gap-8">
+      <!-- Check if user is authenticated -->
       {% if user.is_authenticated %}
-        <li> Welcome, {{ user.username }}</li>
+        <details class="relative p-2">
+          <summary class="cursor-pointer font-bold">{{ user.username|upper }}</summary>
+          <ul class="absolute left-0 z-10 md:mt-2 flex flex-col w-full bg-gray-800 gap-1 shadow-md text-center md:[&_li]:text-base [&_li]:hover:bg-gray-600 [&_li_a]:py-3 [&_li_a]:block">
+            <hr>
+            <li> <a href="">Profile </a></li>
+            <li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="block w-full md:py-3 cursor-pointer">Logout</button>
+              </form>
+            </li>
+          </ul>
+        </details>
       {% else %}
         <li>
           <a href="{% url 'login' %}">Log in</a>
