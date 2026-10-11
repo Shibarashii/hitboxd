@@ -1,0 +1,14 @@
+{% load static %}
+{% for member in members %}
+  <hr>
+  <a href="{% url 'user-profile-detail' member.username %}">
+    <div class="flex gap-2 p-2">
+      <img src="{{ member.profile.avatar_src }}"
+           alt="Avatar"
+           class="w-12 rounded-full">
+      <h1 class="text-brand-lemon-200">{{ member.username }}</h1>
+      <p>{{ member.profile.bio }}</p>
+    </div>
+  </a>
+{% empty %}
+{% endfor %}

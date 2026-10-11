@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_title %}{{ user.username }}{% endblock %}
+{% block content %}
+  <section class="page-container flex">
+    <div class="flex-3">{% include "partials/member_cards.html" with members=members only %}</div>
+    <div class="flex-1"></div>
+  </section>
+{% endblock %}

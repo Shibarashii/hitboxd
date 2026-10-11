@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.templatetags.static import static
 
 
 class User(AbstractUser):
@@ -11,7 +12,6 @@ class User(AbstractUser):
             UserProfile.objects.create(user=self)
 
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     bio = models.TextField(blank=True)
@@ -19,6 +19,12 @@ class UserProfile(models.Model):
 
     def __str__(self) -> str:
         return f"{self.user.username}'s Profile'"
+
+    @property
+    def avatar_src(self):
+        if self.avatar_url:
+            return self.avatar_url.url
+        return static("img/default-profile.jpg")
 
 
 class Follow(models.Model):

@@ -4,10 +4,11 @@
 {% block content %}
   <section class="w-full hero-section h-3/4 px-2 md:gap-5">
     {% if user.is_authenticated %}
-      <h1 class="block text-2xl text-brand-lemon-200 font-black md:text-5xl"> Welcome back, {{ user.username }}!</h1>
+      <h1 class="block text-2xl text-brand-lemon-200 font-black md:text-5xl">Welcome back, {{ user.username }}!</h1>
       <article class="relative">
         <img src="{% static "img/poster-3.png" %}" alt="">
-        <a class="absolute bottom-3 right-12 md:bottom-15 md:right-50 btn-primary w-24 text-xs md:w-64 md:text-base p-0.5 md:p-3" href="{% url 'search-games' %}"> Write a review </a>
+        <a class="absolute bottom-3 right-12 md:bottom-15 md:right-50 btn-primary w-24 text-xs md:w-64 md:text-base p-0.5 md:p-3"
+           href="{% url 'search-games' %}">Write a review</a>
       </article>
     {% else %}
       {% include "partials/headline.html" %}
