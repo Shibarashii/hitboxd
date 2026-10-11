@@ -14,7 +14,7 @@
           <summary class="cursor-pointer font-bold">{{ user.username|upper }}</summary>
           <ul class="absolute left-0 z-10 md:mt-2 flex flex-col w-full bg-gray-800 gap-1 shadow-md text-center md:[&_li]:text-base [&_li]:hover:bg-gray-600 [&_li_a]:py-3 [&_li_a]:block">
             <hr>
-            <li> <a href="">Profile </a></li>
+            <li> <a href="{% url 'user-profile-detail' user.username %}">Profile </a></li>
             <li>
               <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}

@@ -1,4 +1,8 @@
+from typing import Any
+
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpRequest, HttpResponseBase
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
@@ -17,3 +21,9 @@ class SignUpView(SuccessMessageMixin,CreateView):
     template_name = "core/registration.html"
     success_url = reverse_lazy("homepage")
     success_message = "Account created."
+
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
+        if request.user.is_authenticated:
+            return redirect("homepage")
+        return super().dispatch(request, *args, **kwargs)
+

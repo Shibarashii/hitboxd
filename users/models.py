@@ -4,13 +4,18 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    def save(self, *args, **kwargs):
+        is_new = self._state.adding
+        super().save(*args, **kwargs)
+        if is_new:
+            UserProfile.objects.create(user=self)
+
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     bio = models.TextField(blank=True)
-    avatar_url = models.ImageField()
+    avatar_url = models.ImageField(upload_to="avatars/", blank=True)
 
     def __str__(self) -> str:
         return f"{self.user.username}'s Profile'"

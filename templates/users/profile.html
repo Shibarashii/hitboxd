@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_title %}{{ user.username }}{% endblock %}
+{% block content %}
+  <h1>{{ user.username }}</h1>
+  <p>{{ user_profile.bio }}</p>
+  <img src="{{user_profile.avatar_url}}" alt="Avatar">
+{% endblock %}
