@@ -2,7 +2,47 @@
 {% load static %}
 {% block page_title %}{{ member.username }}{% endblock %}
 {% block content %}
-  <h1>{{ member.username }}</h1>
-  <p>{{ member.profile.bio }}</p>
-  <img src="{{ member.profile.avatar_src }}" alt="Avatar">
+  <section class="page-container flex flex-col gap-10 text-brand-lemon-100">
+    <!-- Profile header  -->
+    <div class="flex flex-col md:flex-row gap-5">
+      <div class="flex flex-1 justify-center items-center gap-5">
+        <img src="{{ member.profile.avatar_src }}"
+             alt="Avatar"
+             class="w-12 md:w-24 rounded-full">
+        <h1 class="text-base md:text-xl font-bold">{{ member.username }}</h1>
+        <button class="btn-primary w-24 text-xs md:text-sm md:w-32 p-2">Edit profile</button>
+      </div>
+      <div class="flex flex-1 justify-evenly">
+        <div class="flex flex-col justify-center items-center">
+          <p class="text-lg font-bold">{{ member.review_count }}</p>
+          <p>Games</p>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+          <p class="text-lg font-bold">{{ member.follower_count }}</p>
+          <p>Followers</p>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+          <p class="text-lg font-bold">{{ member.following_count }}</p>
+          <p>Following</p>
+        </div>
+      </div>
+    </div>
+    <!-- Bio -->
+    <div class="flex justify-center items-center text-brand-lemon-100">
+      <p>{{ member.profile.bio|default:"This user does not have a bio." }}</p>
+    </div>
+    <!-- Featured games -->
+    <div class="text-center flex flex-col gap-5">
+      <hr>
+      <div>
+        <h1 class="font-bold uppercase">{{ member.username }}'s Featured Games</h1>
+      </div>
+      <div class="flex gap-2">
+        {% for featured_game in member.featured_games.all %}
+          {% include "partials/game_card.html" with game=featured_game.game %}
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Reviews -->
+  </section>
 {% endblock %}

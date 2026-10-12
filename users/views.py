@@ -1,17 +1,35 @@
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
+from django.db.models import Count, Prefetch
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 
-from .models import User
+from reviews.models import LogEntry
+
+from .models import User, FeaturedGame
 
 
 # Create your views here.
 class UserProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
-    queryset = User.objects.select_related("profile")
+    queryset = (
+        User.objects.select_related("profile")
+        .prefetch_related(
+            Prefetch("featured_games", queryset=FeaturedGame.objects.select_related("game"))
+        )
+        .prefetch_related(
+            Prefetch(
+                "log_entries",
+                queryset=LogEntry.objects.select_related("review", "game"),
+            )
+        )
+        .annotate(
+            follower_count=Count("follower_set", distinct=True),
+            following_count=Count("following_set", distinct=True),
+            review_count=Count("log_entries__review", distinct=True),
+        )
+    )
     template_name = "users/profile.html"
     context_object_name = "member"
     slug_field = "username"

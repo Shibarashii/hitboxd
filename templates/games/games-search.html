@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block page_title %}Game Search{% endblock %}
 {% block content %}
-  <section class="page-container flex flex-wrap justify-center gap-1.5 my-5">
+  <section class="page-container flex flex-wrap justify-center gap-1.5 my-5 text-brand-lemon-100">
     {% for game in games %}
       {% include "partials/game_card.html" with game=game %}
     {% empty %}
