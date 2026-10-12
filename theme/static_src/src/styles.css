@@ -48,6 +48,13 @@
            aria-invalid:border-red-600 aria-invalid:ring-red-600 
            disabled:opacity-50;
   }
+  h1 { 
+    @apply text-sm md:text-base
+  }
+
+  p {
+    @apply text-xs md:text-sm
+  }
 }
 
 @utility btn-primary {

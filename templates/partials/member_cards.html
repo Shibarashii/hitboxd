@@ -1,14 +1,25 @@
 {% load static %}
 {% for member in members %}
-  <hr>
-  <a href="{% url 'user-profile-detail' member.username %}">
-    <div class="flex gap-2 p-2">
-      <img src="{{ member.profile.avatar_src }}"
-           alt="Avatar"
-           class="w-12 rounded-full">
-      <h1 class="text-brand-lemon-200">{{ member.username }}</h1>
-      <p>{{ member.profile.bio }}</p>
+  <div class="flex gap-2 md:gap-5 p-1 md:p-2 border-t justify-between">
+    <!-- Profile  -->
+    <div class="flex gap-2 md:gap-5">
+      <div class="flex items-center justify-center">
+        <img src="{{ member.profile.avatar_src }}"
+             alt="Avatar"
+             class="w-8 md:w-12 rounded-full">
+      </div>
+      <div class="flex flex-col">
+        <h1 class="text-brand-lemon-200 font-bold hover:underline"> <a href="{% url 'user-profile-detail' member.username %}">{{ member.username }} </a></h1>
+        <p>{{ member.profile.bio|default:"This user has no bio." }}</p>
+      </div>
     </div>
-  </a>
+    <div class="flex gap-2 md:gap-5">
+      <p>{{ member.follower_set.count }} followers</p>
+      <p>{{ member.review_count }} reviews</p>
+    </div>
+  </div>
 {% empty %}
+  <div>
+    <p>No members</p>
+  </div>
 {% endfor %}

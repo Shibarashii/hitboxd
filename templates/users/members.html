@@ -2,8 +2,41 @@
 {% load static %}
 {% block page_title %}{{ user.username }}{% endblock %}
 {% block content %}
-  <section class="page-container flex">
-    <div class="flex-3">{% include "partials/member_cards.html" with members=members only %}</div>
-    <div class="flex-1"></div>
+  <section class="page-container flex gap-10 md:gap-50 text-brand-lemon-100">
+    <div class="flex-2">{% include "partials/member_cards.html" with members=members only %}</div>
+    <div class="flex-1 flex flex-col gap-3">
+      <!-- Following -->
+      <div class="border-t md:p-2">
+        <div class="flex justify-between">
+          <p class="uppercase">You follow:</p>
+          <p>{{ following|length }}</p>
+        </div>
+        <div>
+          {% for member in following %}
+          <a href="{% url 'user-profile-detail' member.username %}" title="{{member.username}}"> 
+            <img src="{{ member.profile.avatar_src }}"
+                 alt="{{ member.username }}'s profile picture'"
+                 class="w-6 md:w-12 rounded-full">
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Followers -->
+      <div class="border-t md:p-2">
+        <div class="flex justify-between">
+          <p class="uppercase">Following you:</p>
+          <p>{{ follower|length }}</p>
+        </div>
+        <div>
+          {% for member in follower %}
+            <a href="{% url 'user-profile-detail' member.username %}">
+              <img src="{{ member.profile.avatar_src }}"
+                   alt="{{ member.username }}'s profile picture'"
+                   class="w-6 rounded-full">
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
   </section>
 {% endblock %}
