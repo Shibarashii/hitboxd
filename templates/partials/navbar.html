@@ -1,18 +1,36 @@
 {% load static %}
-<nav class="flex justify-evenly items-center gap-5 bg-gray-800 text-brand-lemon-200 text-center text-xs md:text-base lg:text-lg px-2">
+<nav class="flex flex-wrap justify-between items-center gap-x-5 md:flex-nowrap md:justify-evenly bg-gray-800 text-brand-lemon-200 text-center text-xs md:text-base lg:text-lg px-2">
   <a class="flex items-center" href="{% url 'homepage' %}">
     <img src="{% static 'icons/favicon.png' %}"
          alt="icon"
          class="h-12 p-2 md:h-16 lg:h-18 lg:p-2.5">
     <h1 class="font-bold">HITBOXD</h1>
   </a>
-  <div>
-    <ul class="flex items-center gap-2.5 md:gap-6 lg:gap-8">
+  <!-- Hamburger toggle (no JS): the checkbox state shows/hides the menu below md -->
+  <input type="checkbox"
+         id="nav-toggle"
+         aria-label="Toggle navigation menu"
+         class="peer sr-only">
+  <label for="nav-toggle"
+         class="cursor-pointer p-2 md:hidden peer-focus-visible:outline-2 peer-focus-visible:outline-brand-lemon-200">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         class="size-6"
+         aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </label>
+  <div class="hidden w-full peer-checked:block md:block md:w-auto">
+    <ul class="flex flex-col items-center gap-2.5 pb-3 md:flex-row md:pb-0 md:gap-6 lg:gap-8">
       <!-- Check if user is authenticated -->
       {% if user.is_authenticated %}
         <details class="relative p-2">
           <summary class="cursor-pointer font-bold">{{ user.username|upper }}</summary>
-          <ul class="absolute left-0 z-10 md:mt-2 flex flex-col w-full bg-gray-800 gap-1 shadow-md text-center md:[&_li]:text-base [&_li]:hover:bg-gray-600 [&_li_a]:py-3 [&_li_a]:block">
+          <ul class="md:absolute left-0 z-10 md:mt-2 flex flex-col w-full bg-gray-800 gap-1 shadow-md text-center md:[&_li]:text-base [&_li]:hover:bg-gray-600 [&_li_a]:py-3 [&_li_a]:block">
             <hr>
             <li> <a href="{% url 'user-profile-detail' user.username %}">Profile </a></li>
             <li>
@@ -45,7 +63,7 @@
                    value="{{ request.GET.q }}"
                    placeholder="Search games.."
                    aria-label="Search games"
-                   class="w-28 bg-gray-600 pl-9 text-brand-lemon-200 md:w-56">
+                   class="w-56 bg-gray-600 pl-9 text-brand-lemon-200">
             <svg xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 24 24"
                  fill="none"
