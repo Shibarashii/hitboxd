@@ -5,14 +5,18 @@
   <section class="page-container flex flex-col gap-10 text-brand-lemon-100">
     <!-- Profile header  -->
     <div class="flex flex-col md:flex-row gap-5">
+      <!-- Left: User Profile -->
       <div class="flex flex-1 justify-center items-center gap-5">
         <img src="{{ member.profile.avatar_src }}"
              alt="Avatar"
              class="size-12 shrink-0 object-cover md:size-24 rounded-full">
         <h1 class="text-base md:text-xl font-bold">{{ member.username }}</h1>
-        <a href="{% url 'update-profile' %}"
-           class="btn-primary w-24 text-xs md:text-sm md:w-32 p-2">Edit profile</a>
+        {% if user == member %}
+          <a href="{% url 'update-profile' %}"
+             class="btn-primary w-24 text-xs md:text-sm md:w-32 p-2">Edit profile</a>
+        {% endif %}
       </div>
+      <!-- Right side: Profile statistics -->
       <div class="flex flex-1 justify-evenly">
         <div class="flex flex-col justify-center items-center">
           <p class="text-lg font-bold">{{ member.review_count }}</p>
