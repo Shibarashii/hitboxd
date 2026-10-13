@@ -2,12 +2,15 @@ from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Prefetch
+from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
 
 from reviews.models import LogEntry
 
-from .models import User, FeaturedGame
+from .forms import UserProfileForm
+from .models import FeaturedGame, User
 
 
 # Create your views here.
@@ -55,3 +58,14 @@ class MemberListView(LoginRequiredMixin, ListView):
             following_set__following=self.request.user
         ).select_related("profile")
         return context
+
+
+class EditUserProfileView(LoginRequiredMixin, UpdateView):
+    form_class = UserProfileForm
+    template_name = "users/update-profile.html"
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def get_success_url(self) -> str:
+        return reverse("user-profile-detail", args=[self.request.user.username])

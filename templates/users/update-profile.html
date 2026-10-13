@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}Edit profile{% endblock %}
+{% block content %}
+  <section class="page-container flex justify-center">
+    <!-- Edit profile form container -->
+    <div class="my-5 flex w-full flex-col gap-3 rounded-2xl bg-brand-lemon-100 p-6 md:w-1/2">
+      <div class="flex items-center gap-3">
+        <img src="{{ user.profile.avatar_src }}"
+             alt=""
+             class="size-12 object-cover srhink-0 md:size-16 rounded-full">
+        <h1 class="text-base md:text-xl font-bold">Edit profile</h1>
+      </div>
+      <form method="post"
+            enctype="multipart/form-data"
+            class="flex flex-col gap-4 pt-5">
+        {% csrf_token %}
+        {% for field in form %}
+          {% include "partials/form_field.html" with field=field %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <p class="text-form-error">{{ error }}</p>
+        {% endfor %}
+        <button type="submit" class="btn-primary mt-2 md:mt-4">Save changes</button>
+        <a href="{% url 'user-profile-detail' user.username %}"
+           class="text-center text-xs underline md:text-sm">Cancel</a>
+      </form>
+    </div>
+  </section>
+{% endblock %}

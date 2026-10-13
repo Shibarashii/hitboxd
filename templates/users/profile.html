@@ -8,9 +8,10 @@
       <div class="flex flex-1 justify-center items-center gap-5">
         <img src="{{ member.profile.avatar_src }}"
              alt="Avatar"
-             class="w-12 md:w-24 rounded-full">
+             class="size-12 shrink-0 object-cover md:size-24 rounded-full">
         <h1 class="text-base md:text-xl font-bold">{{ member.username }}</h1>
-        <button class="btn-primary w-24 text-xs md:text-sm md:w-32 p-2">Edit profile</button>
+        <a href="{% url 'update-profile' %}"
+           class="btn-primary w-24 text-xs md:text-sm md:w-32 p-2">Edit profile</a>
       </div>
       <div class="flex flex-1 justify-evenly">
         <div class="flex flex-col justify-center items-center">

@@ -16,6 +16,7 @@ Including another URLconf
 """
 
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
@@ -24,7 +25,7 @@ urlpatterns = [
     path("", include("core.urls")),
     path("games/", include("games.urls")),
     path("users/", include("users.urls"))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     # Include django_browser_reload URLs only in DEBUG mode

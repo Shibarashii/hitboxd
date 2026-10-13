@@ -36,7 +36,7 @@
 }
 
 @layer base {
-  input:where(
+  textarea, input:where(
     [type="text"],
     [type="email"],
     [type="password"],
@@ -48,7 +48,13 @@
            aria-invalid:border-red-600 aria-invalid:ring-red-600 
            disabled:opacity-50;
   }
-  h1 { 
+  input[type="file"] {
+    @apply w-full cursor-pointer text-xs md:text-sm
+           file:mr-3 file:cursor-pointer file:rounded-2xl file:border-0
+           file:bg-brand-lemon-300 file:px-4 file:py-2 file:font-semibold file:text-black
+           hover:file:bg-brand-lemon-200;
+  }
+  h1 {
     @apply text-sm md:text-base
   }
 

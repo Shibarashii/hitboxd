@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block page_title %}{{ user.username }}{% endblock %}
+{% block page_title %}Members{% endblock %}
 {% block content %}
   <section class="page-container flex gap-10 md:gap-50 text-brand-lemon-100">
     <div class="flex-2">{% include "partials/member_cards.html" with members=members only %}</div>
@@ -16,7 +16,7 @@
           <a href="{% url 'user-profile-detail' member.username %}" title="{{member.username}}"> 
             <img src="{{ member.profile.avatar_src }}"
                  alt="{{ member.username }}'s profile picture'"
-                 class="w-6 md:w-12 rounded-full">
+                 class="size-6 md:size-12 object-cover shrink-0 rounded-full">
           </a>
           {% endfor %}
         </div>
@@ -32,7 +32,7 @@
             <a href="{% url 'user-profile-detail' member.username %}">
               <img src="{{ member.profile.avatar_src }}"
                    alt="{{ member.username }}'s profile picture'"
-                   class="w-6 rounded-full">
+                   class="size-6 md:size-12 object-cover shrink-0 rounded-full">
             </a>
           {% endfor %}
         </div>
