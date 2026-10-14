@@ -27,6 +27,7 @@ class LogEntry(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        verbose_name_plural = "log entries"
         constraints = [
             models.UniqueConstraint(
                 fields=["user", "game"], name="unique_user_game_log"
