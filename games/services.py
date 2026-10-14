@@ -10,7 +10,7 @@ def search_games(query: str, page: int = 1) -> dict:
     return fetch_games(search=query, page=page, page_size=PAGE_SIZE)
 
 
-def get_or_sync_game(slug: str):
+def get_or_sync_game(slug: str) -> Game | None:
     try:
         game = Game.objects.get(slug=slug)
         print(f"{tc.GREEN}Cache hit for {game.name.upper()}.{tc.RESET}")
@@ -31,6 +31,7 @@ def get_or_sync_game(slug: str):
             name=fetched_game_details.get("name"),
             slug=fetched_game_details.get("slug"),
             cover_url=fetched_game_details.get("background_image") or "",
+            rawg_rating=fetched_game_details.get("rating") or None,
             release_date=fetched_game_details.get("released") or None,
             summary=fetched_game_details.get("description_raw") or "",
         )

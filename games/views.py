@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 
 from .forms import GameSearchForm
 from .services import PAGE_SIZE, get_or_sync_game, search_games
+from django.http import Http404
 
 
 class SearchGameView(TemplateView):
@@ -35,4 +36,15 @@ class SearchGameView(TemplateView):
 
 def retrieve_game(request, slug):
     game = get_or_sync_game(slug)
-    return render(request, "games/game-details.html", {"game": game})
+    user_rating = None
+    if game is None:
+        raise Http404("Game not found")
+    if request.user.is_authenticated:
+        user_rating = (
+            game.logged_by.filter(user=request.user)
+            .values_list("rating", flat=True)
+            .first()
+        )
+    return render(
+        request, "games/game-details.html", {"game": game, "user_rating": user_rating}
+    )

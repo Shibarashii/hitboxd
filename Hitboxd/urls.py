@@ -24,7 +24,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
     path("games/", include("games.urls")),
-    path("users/", include("users.urls"))
+    path("users/", include("users.urls")),
+    path("reviews/", include("reviews.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

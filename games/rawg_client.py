@@ -13,7 +13,7 @@ _BASE_URL = "https://api.rawg.io/api"
 _API_KEY = os.getenv("RAWG_API_KEY")
 
 
-@dump_response("games.json")
+# @dump_response("games.json")
 def fetch_games(**kwargs) -> dict:
     """
     Fetch a list of games.
@@ -37,7 +37,7 @@ def fetch_games(**kwargs) -> dict:
         return {}
 
 
-@dump_response("game-details.json")
+# @dump_response("game-details.json")
 def fetch_single_game(slug_or_id: int | str) -> dict:
     """
     Fetch a game using an id or slug.
@@ -62,6 +62,7 @@ if __name__ == "__main__":
     name = game_details.get("name")
     slug = game_details.get("slug")
     cover_url = game_details.get("background_image") or None
+    rawg_rating = game_details.get("rating") or None
     release_date = game_details.get("released") or None
     summary = game_details.get("description_raw") or None
     genres = game_details.get("genres") or []
@@ -72,6 +73,7 @@ if __name__ == "__main__":
           {slug}
           {cover_url}
           {release_date}
+          {rawg_rating}
           {summary}
           {type(genres)}
           """)

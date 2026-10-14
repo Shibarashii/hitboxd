@@ -15,9 +15,20 @@ class Game(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
     cover_url = models.URLField(blank=True)
+    rawg_rating = models.DecimalField(
+        decimal_places=2, max_digits=3, null=True, blank=True
+    )
     release_date = models.DateField(null=True, blank=True)
     summary = models.TextField(blank=True)
     genres = models.ManyToManyField(Genre, related_name="games", blank=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(rawg_rating__gte=0, rawg_rating__lte=5),
+                name="rawg_rating_range",
+            )
+        ]
 
     def __str__(self) -> str:
         return self.name
