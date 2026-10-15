@@ -1,49 +1,66 @@
 {% extends "base.html" %}
 {% block page_title %}{{ game.name }}{% endblock %}
 {% block content %}
-  <main>
-    <section class="page-container bg-gray-900 flex flex-col md:flex-row gap-2 text-brand-lemon-100">
-      {% if game %}
-        <!-- Game Photo -->
-        <div class="flex-1 flex justify-center items-center">
-          <img src="{{ game.cover_url }}"
-               alt="{{ game.name }} cover"
-               class="w-3xs md:w-xs aspect-3/4 object-cover">
+  <section class="page-container bg-gray-900 flex flex-col md:flex-row gap-2 text-brand-lemon-100">
+    <!-- Game Photo -->
+    <div class="flex-1 flex justify-center items-center">
+      <img src="{{ game.cover_url }}"
+           alt="{{ game.name }} cover"
+           class="w-3xs md:w-xs aspect-3/4 object-cover">
+    </div>
+    <div class="flex-2 flex-col flex gap-5 p-5">
+      <!-- Game Name  -->
+      <h1 class="font-bold text-3xl text-center md:text-start">{{ game.name }}</h1>
+      <hr>
+      <!-- Summary  -->
+      <p class="text-base text-justify">{{ game.summary }}</p>
+      <hr>
+      <!-- Ratings -->
+      <div class="flex justify-evenly text-center">
+        <div class="flex flex-col justify-center items-center">
+          <p class="text-xl font-bold">Rate this game</p>
+          <form method="post" action="{% url 'rate-game' slug=game.slug %}">
+            {% csrf_token %}
+            <div class="flex flex-row-reverse justify-end text-xl text-gray-400 [&:hover>button]:text-gray-400 [&>button:hover]:text-brand-lemon-300! [&>button:hover~button]:text-brand-lemon-300!">
+              {% for n in "54321" %}
+                <button type="submit"
+                        name="rating"
+                        value="{{ n }}"
+                        onclick="return confirm('Submit a rating of {{ n }}?')"
+                        aria-label="Rate {{ n }} star{{ n|pluralize }}"
+                        class="cursor-pointer text-4xl {% if user_rating >= n|add:0 %}text-brand-lemon-300{% endif %}">★</button>
+              {% endfor %}
+            </div>
+          </form>
         </div>
-        <div class="flex-2 flex-col flex gap-5 p-5">
-          <!-- Game Name  -->
-          <h1 class="font-bold text-3xl text-center md:text-start">{{ game.name }}</h1>
-          <hr>
-          <!-- Summary  -->
-          <p class="text-base text-justify">{{ game.summary }}</p>
-          <hr>
-          <!-- Ratings -->
-          <div class="flex justify-evenly text-center">
-            <div class="flex flex-col justify-center items-center">
-              <p class="text-xl font-bold">Rate this game</p>
-              <form method="post" action="{% url 'rate-game' slug=game.slug%}">
-                {% csrf_token %}
-                <div class="flex flex-row-reverse justify-end text-xl text-gray-400 [&:hover>button]:text-gray-400 [&>button:hover]:text-brand-lemon-300! [&>button:hover~button]:text-brand-lemon-300!">
+        <div>
+          <p class="text-xl block font-semibold">Ratings:</p>
+          <p class="text-4xl font-black block">{{ game.rawg_rating|default:0 }}</p>
+        </div>
+      </div>
+      <!-- Reviews -->
+      <hr>
+      <div class="flex flex-col gap-3">
+        <h1 class="text-2xl font-bold">Reviews</h1>
+        {% for log in logs %}
+            <!-- Profile  -->
+            <div class="flex gap-2 md:gap-5">
+              <div class="flex items-center justify-center">
+                <img src="{{ log.user.profile.avatar_src }}"
+                     alt="Avatar"
+                     class="size-8 md:size-12 shrink-0 object-cover rounded-full">
+              </div>
+              <div class="flex flex-col">
+                <h1 class="text-brand-lemon-200 font-bold hover:underline"> <a href="{% url 'user-profile-detail' log.user.username %}">{{ log.user.username }} </a></h1>
+                <!-- Rating -->
+                <div class="flex flex-row-reverse justify-end text-xl text-gray-400">
                   {% for n in "54321" %}
-                    <button type="submit"
-                            name="rating"
-                            value="{{ n }}"
-                            onclick="return confirm('Submit a rating of {{n}}?')"
-                            aria-label="Rate {{ n }} star{{ n|pluralize }}"
-                            class="cursor-pointer text-4xl {% if user_rating >= n|add:0 %}text-brand-lemon-300{% endif %}">★</button>
+                    <p class="text-4xl {% if log.rating >= n|add:0 %}text-brand-lemon-300{% endif %}">★</p>
                   {% endfor %}
                 </div>
-              </form>
+              </div>
             </div>
-            <div>
-              <p class="text-xl block font-semibold">Ratings:</p>
-              <p class="text-4xl font-black block">{{ game.rawg_rating|default:0 }}</p>
-            </div>
-          </div>
-        </div>
-      {% else %}
-        <h1>Game not found</h1>
-      {% endif %}
-    </section>
-  </main>
+        {% endfor %}
+    </div>
+  </section>
 {% endblock %}

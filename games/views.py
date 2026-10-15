@@ -1,11 +1,11 @@
 from math import ceil
 
+from django.http import Http404
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
 from .forms import GameSearchForm
 from .services import PAGE_SIZE, get_or_sync_game, search_games
-from django.http import Http404
 
 
 class SearchGameView(TemplateView):
@@ -36,9 +36,10 @@ class SearchGameView(TemplateView):
 
 def retrieve_game(request, slug):
     game = get_or_sync_game(slug)
-    user_rating = None
     if game is None:
         raise Http404("Game not found")
+    logs = game.logged_by.select_related("user__profile")
+    user_rating = None
     if request.user.is_authenticated:
         user_rating = (
             game.logged_by.filter(user=request.user)
@@ -46,5 +47,7 @@ def retrieve_game(request, slug):
             .first()
         )
     return render(
-        request, "games/game-details.html", {"game": game, "user_rating": user_rating}
+        request,
+        "games/game-details.html",
+        {"game": game, "user_rating": user_rating, "logs": logs},
     )
